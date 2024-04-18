@@ -1,1 +1,48 @@
+#include <iostream> 
+#include <stack>
+#include <fstream>
+using namespace std;
+
+class CReadFile {
+  public:
+    void readMovies() {
+        string filename = "input.txt";
+        ifstream inFile(filename);
+        if (!inFile) {
+            cerr << "Unable to open file: " << filename << endl;
+            return;
+        }
+
+        string title;
+        int lineNumber = 1;
+        while (getline(inFile, title)) {
+            if (lineNumber % 2 == 0) {
+                stack_even.push(title);
+            } else {
+                stack_odd.push(title);
+            }
+            lineNumber++;
+        }
+
+        inFile.close();
+    }
+    
+    void printStacks() {
+        cout << "Titles in Odd Stack:" << endl;
+        while (!stack_odd.empty()) {
+            cout << stack_odd.top() << endl;
+            stack_odd.pop();
+        }
+
+        cout << "\nTitles in Even Stack:" << endl;
+        while (!stack_even.empty()) {
+            cout << stack_even.top() << endl;
+            stack_even.pop();
+        }
+    }
+
+  private:
+    stack<string> stack_odd;
+    stack<string> stack_even;
+};
 
