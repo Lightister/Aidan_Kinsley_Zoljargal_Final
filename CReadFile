@@ -41,6 +41,45 @@ class CReadFile {
         }
     }
 
+    
+    int getsizeEven() {
+        return stacksizeEven;
+    }
+
+    int getsizeOdd() {
+        return stacksizeOdd;
+    }
+    
+    string getTopEven(){
+        string temp;
+       if (!stack_even.empty()) {
+           temp = stack_even.top();
+        return temp;
+    } else {
+        return "Stack is empty";
+    }
+    }
+    string getTopOdd(){
+        if (!stack_odd.empty()) {
+        return stack_odd.top();
+    } else {
+        return "Stack is empty";
+    }
+    }
+    void popEven(){
+        stack_even.pop();
+        
+    }
+      void popOdd(){
+        stack_odd.pop();
+        
+    }
+    
+    void setstacksizeEven(int set){
+        stacksizeEven = set;
+    }
+    
+
   private:
     stack<string> stack_odd;
     stack<string> stack_even;
