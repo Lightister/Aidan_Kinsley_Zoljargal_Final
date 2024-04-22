@@ -1,1 +1,162 @@
+#include <iostream> 
+#include <stack>
+#include <fstream>
+#include <string>
+#include <vector>
+#include "CReadFile.h"
+//using namespace std;
 
+
+class Crand {
+    
+
+public: 
+
+void transferOdd(CReadFile crf){
+    bool not_done;
+    not_done = true;
+    int oddSize = crf.stacksizeOdd;
+    vector<string> odd(oddSize);
+      std::srand(static_cast<unsigned>(time(nullptr)));
+      
+    int lower_bound = 0;
+    int upper_bound = oddSize;
+    int total_bound = oddSize;
+    
+     
+    int full[oddSize];
+    for(int i = 0; i<=oddSize-1; i++)
+    {
+        full[i] = 0;
+    }
+    
+    
+        for(int i = 0; i <=oddSize-1; i++)
+        {
+              not_done = true;
+            int random_number = (lower_bound + rand() % (upper_bound - lower_bound));
+            while(not_done){
+            if(full[random_number] == 1){
+                
+                random_number = lower_bound + rand() % (upper_bound - lower_bound);
+            }
+            else{
+                odd[random_number] = crf.getTopOdd();
+                crf.popOdd();
+                full[random_number] = 1;
+                total_bound--;
+              
+                not_done = false;
+            }
+            
+        }
+        
+    }
+    for(int i = 0; i<oddSize; i++){
+    stack_oddrand.push(odd[i]);
+    }
+    }
+    
+void transferEven(CReadFile crf){
+    bool not_done;
+    not_done = true;
+    int evenSize = crf.stacksizeEven;
+    vector<string> even(evenSize);
+      std::srand(static_cast<unsigned>(time(nullptr)));
+      
+    int lower_bound = 0;
+    int upper_bound = evenSize;
+    int total_bound = evenSize;
+    
+     
+    int full[evenSize];
+    for(int i = 0; i<=evenSize-1; i++)
+    {
+        full[i] = 0;
+    }
+    
+    
+        for(int i = 0; i <=evenSize-1; i++)
+        {
+              not_done = true;
+            int random_number = (lower_bound + rand() % (upper_bound - lower_bound));
+            while(not_done){
+            if(full[random_number] == 1){
+                
+                random_number = lower_bound + rand() % (upper_bound - lower_bound);
+            }
+            else{
+                even[random_number] = crf.getTopEven();
+                crf.popEven();
+                full[random_number] = 1;
+                total_bound--;
+                not_done = false;
+            }
+            
+        }
+        
+    }
+    for(int i = 0; i<evenSize; i++){
+    stack_evenrand.push(even[i]);
+}
+    }
+
+
+
+    string getEvenMovie(){
+          string temp;
+       if (!stack_evenrand.empty()) {
+           temp = stack_evenrand.top();
+        return temp;
+    } else {
+        even_empty = true;
+    }
+    if(odd_empty == true){
+        string done = "Both stacks are empty";
+        
+    }
+    else{
+        return getOddMovie();
+    }
+
+    }
+    
+       string getOddMovie(){
+          string temp;
+       if (!stack_oddrand.empty()) {
+           temp = stack_oddrand.top();
+        return temp;
+    } else {
+        even_empty = true;
+    }
+    if(even_empty == true){
+        string done = "Both stacks are empty";
+        
+    }
+    else{
+        return getOddMovie();
+        
+    }
+
+    }
+    
+      
+    
+
+
+
+
+private: 
+	stack<string> stack_oddrand;
+	stack<string> stack_evenrand;
+    bool even_empty = false;
+    bool odd_empty = false;
+	
+    //int even[evenSize], odd[sizeOdd];
+    
+    //vector<string> odd(sizeOdd);
+    
+    //string* even = new string[evenSize];
+    //string* odd = new string[sizeOdd];
+
+};
