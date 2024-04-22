@@ -1,5 +1,7 @@
 #include <iostream> 
 #include <stack>
+#include "CReadFile"
+
 using namespace std;
 int main() {
 	stack<int> stack;
@@ -17,6 +19,9 @@ int main() {
 		cout << stack.top() <<" ";
 		stack.pop();
 	}
+	CReadFile crf;
+    	crf.readMovies();
+    	crf.printStacks();
 }
 
 // reference https://www.geeksforgeeks.org/stack-in-cpp-stl/#

@@ -1,1 +1,28 @@
+// CFantasyMovies.h
+#ifndef CFANTASYMOVIES_H
+#define CFANTASYMOVIES_H
+#include<QtGui/QGuiApplication>
 
+class CFantasyMovies : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit CFantasyMovies(QObject *parent = 0);
+
+signals:
+    void oddNumberDetected();
+    void evenNumberDetected();
+
+public slots:
+    void processNumber(int number){
+        qDebug() << "number from QML: " << number;
+        if (number%2 == 0){
+            emit evenNumberDetected();
+        }else{
+            emit oddNumberDetected();
+        }
+    }
+};
+
+#endif // CFANTASYMOVIES_H
